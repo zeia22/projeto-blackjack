@@ -1,23 +1,10 @@
-/**
- * EXEMPLO DE UTILIZAÇÃO DA 'comprarCarta'
- * 
- * 
-    const carta = comprarCarta(); // Sorteia uma carta. Por exemplo, o rei de ouros
-    
-    console.log(carta.texto) // imprime o texto da carta. Exemplo: "K♦️" (indica "K" de ouros)
-    console.log(carta.valor) // imprime o valor da carta (um número). Exemplo: 10 (dado que "K" vale 10)
- * 
- * 
- * 
- */
+ 
 
 
 
-// messagem de boas vindas.O usuário deve ser questionado se deseja iniciar uma nova rodada
-
-const continuarJogando = confirm(`Seja bem vindo ao jogo Blackjack!  \n    Deseja iniciar o jogo?`);
-
-
+//confirmação //Boas vindas
+const continuarJogando = confirm(`Seja bem vindo ao jogo BlackJack!  Deseja iniciar o jogo?`);
+if(continuarJogando){
 
 
 const jogadorCarta1 = comprarCarta();
@@ -25,28 +12,11 @@ const jogadorCarta2 = comprarCarta();
 const computadorCarta1 = comprarCarta();
 const computadorCarta2 = comprarCarta();
 
-const verificarSoma11 = (cartas) => {
-  let soma = 0;
-  for (let carta of cartas) {
-    soma += carta.valor;
-  }
-  return soma === 11;
-}
-
-let comprandoCartas = (jogadorCarta1, jogadorCarta2, computadorCarta1, computadorCarta2) => {
-  let todosJogadores = []
-  if (continuarJogando) {
-    todosJogadores = [jogadorCarta1, jogadorCarta2, computadorCarta1, computadorCarta2];
-
-  }
-
-  return todosJogadores
-}
-
 const cartasJogador = [jogadorCarta1, jogadorCarta2];
 const cartasComputador = [computadorCarta1, computadorCarta2];
-const todasCartas = comprandoCartas();
 
+
+//Mostrando as cartas
 const mostrandoCartas = () => {
 
   let comprarMaisCarta = confirm(`Suas cartas são ${jogadorCarta1.texto} ${jogadorCarta2.texto}. A carta revelada do computador é ${computadorCarta1.texto} XX.\n Deseja comprar mais uma carta?`);
@@ -55,55 +25,12 @@ const mostrandoCartas = () => {
 }
 const comprarMaisCarta = mostrandoCartas();
 
+// Verificando se tem duas carata com valor 11
 const duasCartasA = (jogador, computador) => {
 
   return (jogador[0].valor === 11 && jogador[1].valor === 11) || (computador[0].valor === 11 && computador[1].valor === 11)
 
 }
-
-while (duasCartasA(cartasJogador, cartasComputador)) {
-  mostrandoCartas();
-
-  if (duasCartasA(cartasJogador, cartasComputador)) {
-    break;
-  }
-
-}
-
-
-const jogar = () => {
-  let continuarJogando = true;
-
-  while (continuarJogando) {
-    let jogadorCarta1 = comprarCarta();
-    let jogadorCarta2 = comprarCarta();
-    let computadorCarta1 = comprarCarta();
-    let computadorCarta2 = comprarCarta();
-
-    // verifica se as cartas do jogador ou do computador somam 11
-    while (verificarSoma11([jogadorCarta1, jogadorCarta2]) || verificarSoma11([computadorCarta1, computadorCarta2])) {
-      jogadorCarta1 = comprarCarta();
-      jogadorCarta2 = comprarCarta();
-      computadorCarta1 = comprarCarta();
-      computadorCarta2 = comprarCarta();
-    }
-
-    const mostrandoCartas = () => {
-      const cartasJogador = [jogadorCarta1, jogadorCarta2];
-      const cartasComputador = [computadorCarta1, computadorCarta2];
-
-      const todasCartas = comprandoCartas();
-
-      let comprarMaisCarta = confirm(`Suas cartas são ${jogadorCarta1.texto} ${jogadorCarta2.texto}. A carta revelada do computador é ${computadorCarta1.texto} XX.\n Deseja comprar mais uma carta?`);
-
-      if ((jogadorCarta1[0].valor === 11 && jogadorCarta2[1].valor === 11) || (computadorCarta1[0].valor === 11 && computadorCarta2[1].valor === 11)) {
-        // ...
-      }
-    }
-    break;
-  }
-}
-
 
 while (comprarMaisCarta) {
   //Nova carta do Jogador
@@ -115,15 +42,19 @@ while (comprarMaisCarta) {
     textoCartasJogador += cartassJ.texto;
   }
   //Nova carta do Computador
+  // vai comprar carta se for menor que ou igual a  17
+  const somaCartasComputador1 = cartasComputador[0].valor + cartasComputador[1].valor; 
+  if(somaCartasComputador1 <= 17){
   let novaCartaComputador = comprarCarta();
   cartasComputador.push(novaCartaComputador);
-
+  }
   let textoCartasComputador = "";
   for (let cartassC of cartasComputador) {
     textoCartasComputador += cartassC.texto;
   }
 
-  let comprarMaisCarta = confirm(`Suas cartas são ${textoCartasJogador}. A carta revelada do computador é ${computadorCarta1.texto} XX.\n Deseja comprar mais uma carta?`);
+
+ confirm(`Suas cartas são ${textoCartasJogador}. A carta revelada do computador é ${computadorCarta1.texto} XX.\n Deseja comprar mais uma carta?`);
   break;
 }
 let textoCartasJogador = "";
@@ -134,15 +65,18 @@ let textoCartasComputador = "";
 for (let cartassC of cartasComputador) {
   textoCartasComputador += cartassC.texto;
 }
+//Somando as cartas
 let somaCartasJogador = 0;
 let somaCartasComputador = 0;
 
 for (let j of cartasJogador) {
   somaCartasJogador += j.valor;
 }
+
 for (let l of cartasComputador) {
   somaCartasComputador += l.valor;
 }
+
 
 // Se os dois passarem de 21
 const mensagem = `Suas cartas são ${textoCartasJogador}. Sua pontuação é ${somaCartasJogador}. 
@@ -166,6 +100,8 @@ if (somaCartasJogador > 21 && somaCartasComputador > 21) {
 } else if (somaCartasJogador > 21 && somaCartasComputador < 21) {
   console.log(`${mensagem} 
    O computador ganhou!`);
-} else {
-  console.log(`Fim do jogo!`);
+}
+
+}else{
+  console.log();("O jogo acabou");
 }
