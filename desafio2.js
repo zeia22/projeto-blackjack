@@ -52,11 +52,24 @@ while (comprarMaisCarta) {
   for (let cartassC of cartasComputador) {
     textoCartasComputador += cartassC.texto;
   }
+  //Somando as cartas
+let somaCartasJogador = 0;
+let somaCartasComputador = 0;
+
+for (let j of cartasJogador) {
+  somaCartasJogador += j.valor;
+}
+
+for (let l of cartasComputador) {
+  somaCartasComputador += l.valor;
+}
 
 
- confirm(`Suas cartas são ${textoCartasJogador}. A carta revelada do computador é ${computadorCarta1.texto} XX.\n Deseja comprar mais uma carta?`);
+ confirm(`Suas cartas são ${textoCartasJogador}. Sua pontuação é ${somaCartasJogador}.
+ As carta revelada do computador é ${computadorCarta1.texto} XX.\n Deseja comprar mais uma carta?`);
   break;
 }
+//mostrando as cartas do array cartas jogador
 let textoCartasJogador = "";
 for (let cartassJ of cartasJogador) {
   textoCartasJogador += cartassJ.texto;
@@ -83,25 +96,25 @@ const mensagem = `Suas cartas são ${textoCartasJogador}. Sua pontuação é ${s
 As cartas do computador são ${textoCartasComputador}. A pontuação do computador é ${somaCartasComputador}.`;
 
 if (somaCartasJogador > 21 && somaCartasComputador > 21) {
-  console.log(`${mensagem} 
+  alert(`${mensagem} 
    Nenhum jogador ganhou.`);
 } else if (somaCartasJogador === somaCartasComputador) {
-  console.log(`${mensagem} 
+  alert(`${mensagem} 
    Empatou!`);
 } else if (somaCartasJogador <= 21 && somaCartasComputador > 21) {
-  console.log(`${mensagem} 
+  alert(`${mensagem} 
    O usuário ganhou!`);
 } else if (somaCartasJogador > somaCartasComputador && somaCartasJogador <= 21) {
-  console.log(`${mensagem} 
+  alert(`${mensagem} 
    O usuário ganhou!`);
 } else if (somaCartasComputador <= 21 && somaCartasComputador > somaCartasJogador) {
-  console.log(`${mensagem} 
+  alert(`${mensagem} 
    O computador ganhou!`);
 } else if (somaCartasJogador > 21 && somaCartasComputador < 21) {
-  console.log(`${mensagem} 
+  alert(`${mensagem} 
    O computador ganhou!`);
 }
 
 }else{
-  console.log();("O jogo acabou");
+  alert();("O jogo acabou");
 }
