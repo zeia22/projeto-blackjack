@@ -16,6 +16,15 @@ const cartasJogador = [jogadorCarta1, jogadorCarta2];
 const cartasComputador = [computadorCarta1, computadorCarta2];
 
 
+// Verificando se tem duas carta com valor 11
+const duasCartasA = (jogador, computador) => {
+
+  return (jogador[0].valor === 11 && jogador[1].valor === 11) || (computador[0].valor === 11 && computador[1].valor === 11)
+
+}
+duasCartasA(cartasJogador,cartasComputador)
+
+
 //Mostrando as cartas
 const mostrandoCartas = () => {
 
@@ -24,13 +33,6 @@ const mostrandoCartas = () => {
 
 }
 const comprarMaisCarta = mostrandoCartas();
-
-// Verificando se tem duas carata com valor 11
-const duasCartasA = (jogador, computador) => {
-
-  return (jogador[0].valor === 11 && jogador[1].valor === 11) || (computador[0].valor === 11 && computador[1].valor === 11)
-
-}
 
 while (comprarMaisCarta) {
   //Nova carta do Jogador
@@ -48,10 +50,15 @@ while (comprarMaisCarta) {
   let novaCartaComputador = comprarCarta();
   cartasComputador.push(novaCartaComputador);
   }
-  let textoCartasComputador = "";
-  for (let cartassC of cartasComputador) {
-    textoCartasComputador += cartassC.texto;
-  }
+
+  // Verificando se tem duas carta com valor 11
+const duasCartasA = (jogador, computador) => {
+
+  return (jogador[0].valor === 11 && jogador[1].valor === 11) || (computador[0].valor === 11 && computador[1].valor === 11)
+
+}
+duasCartasA(cartasJogador,cartasComputador)
+  
   //Somando as cartas
 let somaCartasJogador = 0;
 let somaCartasComputador = 0;
