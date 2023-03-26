@@ -123,5 +123,5 @@ if (somaCartasJogador > 21 && somaCartasComputador > 21) {
 }
 
 }else{
-  alert();("O jogo acabou");
+  alert("O jogo acabou");
 }
